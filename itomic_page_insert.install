@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * Implements hook_field_schema().
+ */
+function itomic_page_insert_field_schema($field) {
+  switch ($field['type']) {
+    case 'itomic_page_insert':
+      $columns = array(
+        'page_insert' => array(
+          'type' => 'varchar',
+          'length' => 512,
+          'default' => '',
+        ),
+        'description' => array(
+          'type' => 'text',
+          'not null' => FALSE,
+        ),
+      );
+      $indexes = array();
+      break;
+  }
+
+  return array(
+    'columns' => $columns,
+    'indexes' => $indexes,
+  );
+}

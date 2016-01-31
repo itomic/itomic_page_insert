@@ -1,0 +1,37 @@
+<?php
+
+
+// Load all Field module hooks.
+module_load_include('inc', 'itomic_page_insert', 'itomic_page_insert.field');
+
+
+
+/**
+ * Custom field cacher
+ * @param  boolean $force
+ * @return Array         
+ */
+function itomic_page_insert_get_inserts($force = false) {
+
+  $data = &drupal_static(__FUNCTION__);
+
+  if (!$force && !isset($data)) {
+    if (!$force && $cache = cache_get('itomic_page_inserts')) {
+      $data = $cache->data;
+    }
+    else {
+
+      $data = array();
+      foreach (module_implements('itomic_page_inserts') as $module) {
+        // will call all modules implementing hook_hook_name and 
+        // push the results onto the $result array
+        $result = module_invoke($module, 'itomic_page_inserts');
+        $data =  array_merge($data, $result);
+      }
+      
+      cache_set('itomic_page_inserts', $data, 'cache');
+    }
+  }
+  return $data;
+}
+

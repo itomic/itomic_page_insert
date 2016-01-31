@@ -1,0 +1,5 @@
+name = ITOMIC Page insert
+description = Helper used to resend webforms
+package = Itomic
+core = 7.x
+
