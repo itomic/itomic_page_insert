@@ -9,8 +9,7 @@ This works well with the [paragraphs](https://www.drupal.org/project/paragraphs)
 To define the callbacks, create a custom module and define the following hook. 
 Then include you custom callback function. 
 
-```
-#!php
+```php
 
 /**
  * hook_itomic_page_insert
